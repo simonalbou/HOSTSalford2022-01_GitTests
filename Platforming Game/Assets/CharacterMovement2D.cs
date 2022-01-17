@@ -105,32 +105,34 @@ public class CharacterMovement2D : MonoBehaviour
         // in case of a collision, perform what we can (get as close as possible) before aborting
         else
         {
-            // distance to the wall is what we can travel safely
-            float hitDistance = result.distance;
-            transform.Translate(moveDir.normalized * hitDistance);
-
-            // BONUS : SLOPE HANDLING //
-
             // was there a slope? if so, if the angle allows it, move up so we stay above the ground
             if (moveDir.y == 0) // we will not process vertical movement
             {
+                // store the horizontal distance to travel here, for the sake of clarity
+                float horizontalDistance = Mathf.Abs(moveDir.x);
+
                 // calculate slope angle and only move if it's low enough
                 float slopeAngle = Mathf.Abs(90f - Vector2.Angle(moveDir.normalized, result.normal));
                 if (slopeAngle < slopeMaxThreshold)
                 {
-                    Debug.Log(slopeAngle);
-                    // calc the remaining horizontal movement to make
-                    float remainingMovement = Mathf.Abs(moveDir.x) - hitDistance;
                     // calc the vertical displacement it would represent if it was performed
-                    float correspondingVerticalMovement = Mathf.Tan(slopeAngle * Mathf.Deg2Rad) * remainingMovement;
+                    float verticalDistance = Mathf.Abs(Mathf.Tan(slopeAngle * Mathf.Deg2Rad) * horizontalDistance);
                     // try to perform vertical movement
-                    if (Move(Vector2.up * correspondingVerticalMovement).collider == null)
+                    RaycastHit2D resultOfVertical = Move(Vector2.up * verticalDistance);
+                    // if this vertical movement didn't hit the ceiling, we can perform the remaining horizontal movement
+                    if (resultOfVertical.collider == null)
                     {
-                        // if this vertical movement didn't hit the ceiling, we can perform the remaining horizontal movement
-                        transform.Translate(moveDir.normalized * remainingMovement);
+                        transform.Translate(moveDir.normalized * horizontalDistance);
                     }
                 }
             }
+
+            // Hit distance (ie. distance to the wall) is what we can travel safely
+            // EDIT : this is not compatible with handling slopes! It sends the ray origin INSIDE colliders.
+            // A viable fix would be subtracting an infinitesimal offset to the result. 
+            
+            //float hitDistance = result.distance;
+            //transform.Translate(moveDir.normalized * hitDistance);
         }
 
         return result;
