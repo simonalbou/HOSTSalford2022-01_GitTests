@@ -38,6 +38,7 @@
   <ItemGroup>
      <Compile Include="Assets\CSharpConcepts.cs" />
      <Compile Include="Assets\Raycaster2D.cs" />
+     <Compile Include="Assets\CharacterMovement2D.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.2.7f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -695,6 +696,9 @@
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
         <HintPath>D:\Work\HOST Salford\Github_Tests_For_HOSTSalford\OurFirstRepository_V2\Platforming Game\Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+        <HintPath>D:\Work\HOST Salford\Github_Tests_For_HOSTSalford\OurFirstRepository_V2\Platforming Game\Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
         <HintPath>D:\Work\HOST Salford\Github_Tests_For_HOSTSalford\OurFirstRepository_V2\Platforming Game\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
     </Reference>
@@ -724,9 +728,6 @@
     </Reference>
     <Reference Include="Unity.EditorCoroutines.Editor">
         <HintPath>D:\Work\HOST Salford\Github_Tests_For_HOSTSalford\OurFirstRepository_V2\Platforming Game\Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Sprite.Editor">
-        <HintPath>D:\Work\HOST Salford\Github_Tests_For_HOSTSalford\OurFirstRepository_V2\Platforming Game\Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
