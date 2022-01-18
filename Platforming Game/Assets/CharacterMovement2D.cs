@@ -1,17 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CharacterMovement2D : MonoBehaviour
 {
+    [Header("Global movement stats")]
     public float speed = 5f;
     public float gravity = 8f;
     public float slopeMaxThreshold = 50f;
-    public float jumpDuration = 1f;
+
+    [Header("Jump Parameters")]
     public int maxAllowedJumps = 3;
     public AnimationCurve jumpCurve;
 
+    [Header("References")]
     public Raycaster2D raycaster;
+
+    [Header("Events")]
+    public UnityEvent onJump;
+    public UnityEvent onLanding;
 
     bool isGrounded; // always starts false, we're mid-air for the first frame
 
@@ -48,6 +56,9 @@ public class CharacterMovement2D : MonoBehaviour
         // Prepare to store the collision detection result into this variable
         RaycastHit2D result;
 
+        // Is the player moving up or down here?
+        bool playerIsMovingDown = true;
+
         // Jump update
         if (isJumping)
         {
@@ -58,6 +69,10 @@ public class CharacterMovement2D : MonoBehaviour
 
             // Vertical movement is the difference of altitude between these two frames
             result = Move(Vector2.up * (currentWantedHeight-previousHeight));
+
+            // If it turns out the player is moving up, store this info so we can't get considered as "grounded" this frame
+            if (currentWantedHeight - previousHeight > 0)
+                playerIsMovingDown = false;
 
             // End jump when the end of the curve is reached
             if (timeSinceJumped > jumpCurve.keys[jumpCurve.keys.Length-1].time)
@@ -71,8 +86,13 @@ public class CharacterMovement2D : MonoBehaviour
         }
         
         // Update grounded state
-        isGrounded = (result.collider != null);
-        if (isGrounded) currentlyRemainingJumps = maxAllowedJumps;
+        // Extra boolean helps not triggering "grounded" upon hitting ceiling
+        isGrounded = (result.collider != null && playerIsMovingDown);
+        if (isGrounded)
+        {
+            currentlyRemainingJumps = maxAllowedJumps;
+            isJumping = false;
+        }
     }
 
     // Trigger called only upon pressing the key.
@@ -85,6 +105,9 @@ public class CharacterMovement2D : MonoBehaviour
         isJumping = true;
         timeSinceJumped = 0f;
         currentlyRemainingJumps--;
+
+        // player just started a jump
+        onJump.Invoke();
     }
 
     // Function that should be used instead of Translate(), so it auto-aborts the movement if it would collide

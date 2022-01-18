@@ -39,6 +39,9 @@
      <Compile Include="Assets\CharacterMovement2D.cs" />
      <Compile Include="Assets\CSharpConcepts.cs" />
      <Compile Include="Assets\Raycaster2D.cs" />
+     <Compile Include="Assets\CustomScriptForFeedbacks.cs" />
+     <Compile Include="Assets\AudioTests.cs" />
+     <Compile Include="Assets\ParticleTests.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2021.2.7f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
