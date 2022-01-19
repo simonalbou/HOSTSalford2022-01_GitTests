@@ -101,11 +101,17 @@ public class CharacterMovement2D : MonoBehaviour
         
         // Update grounded state
         // Extra boolean helps not triggering "grounded" upon hitting ceiling
+        bool wasGroundedLastFrame = isGrounded;
         isGrounded = (result.collider != null && playerIsMovingDown);
+        selfAnimator.SetBool("IsGrounded", isGrounded);
         if (isGrounded)
         {
             currentlyRemainingJumps = maxAllowedJumps;
             isJumping = false;
+            if (!wasGroundedLastFrame)
+            {
+                onLanding.Invoke();
+            }
         }
     }
 
