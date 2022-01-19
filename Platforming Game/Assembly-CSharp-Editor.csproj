@@ -316,11 +316,11 @@
     <Reference Include="ReportGeneratorMerged">
         <HintPath>D:\Work\HOST Salford\Github_Tests_For_HOSTSalford\OurFirstRepository_V2\Platforming Game\Library\PackageCache\com.unity.testtools.codecoverage@1.0.1\lib\ReportGenerator\ReportGeneratorMerged.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-        <HintPath>D:\Work\HOST Salford\Github_Tests_For_HOSTSalford\OurFirstRepository_V2\Platforming Game\Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="JMOAssets_CartoonFXFreeWelcome">
         <HintPath>D:\Work\HOST Salford\Github_Tests_For_HOSTSalford\OurFirstRepository_V2\Platforming Game\Assets\JMO Assets\Editor\JMOAssets_CartoonFXFreeWelcome.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+        <HintPath>D:\Work\HOST Salford\Github_Tests_For_HOSTSalford\OurFirstRepository_V2\Platforming Game\Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
         <HintPath>D:\Work\HOST Salford\Github_Tests_For_HOSTSalford\OurFirstRepository_V2\Platforming Game\Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>
