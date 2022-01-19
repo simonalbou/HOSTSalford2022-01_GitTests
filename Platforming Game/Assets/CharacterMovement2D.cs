@@ -16,6 +16,8 @@ public class CharacterMovement2D : MonoBehaviour
 
     [Header("References")]
     public Raycaster2D raycaster;
+    public Animator selfAnimator;
+    public Transform graphicsTransform;
 
     [Header("Events")]
     public UnityEvent onJump;
@@ -46,6 +48,18 @@ public class CharacterMovement2D : MonoBehaviour
 
         // throw rays to the left/right and move it allowed
         Move(Vector2.right * moveDirection * speed * Time.deltaTime); // same as new Vector2(moveDirection * 1, moveDirection * 0);
+    
+        selfAnimator.SetFloat("CharacterSpeed", Mathf.Abs(moveDirection));
+
+        // scale the graphics transform along the X axis to +1 or -1
+        if (moveDirection != 0)
+        {
+            float x = Mathf.Abs(graphicsTransform.localScale.x) * Mathf.Sign(moveDirection);
+            float y = graphicsTransform.localScale.y;
+            float z = graphicsTransform.localScale.z;
+
+            graphicsTransform.localScale = new Vector3(x, y, z);
+        }
     }
 
     void VerticalUpdate()
